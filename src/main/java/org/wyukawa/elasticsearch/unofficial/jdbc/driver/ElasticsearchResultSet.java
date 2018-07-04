@@ -215,12 +215,12 @@ public class ElasticsearchResultSet implements ResultSet {
 
     @Override
     public ResultSetMetaData getMetaData() throws SQLException {
-        return null;
+        return new ElasticsearchResultSetMetaData(elasticsearchResponse);
     }
 
     @Override
     public Object getObject(int columnIndex) throws SQLException {
-        return null;
+        return elasticsearchResponse.getRows().get(this.index).get(columnIndex - 1);
     }
 
     @Override
