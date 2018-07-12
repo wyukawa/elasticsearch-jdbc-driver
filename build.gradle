@@ -2,6 +2,8 @@ group 'com.github.wyukawa.elasticsearch.unofficial.jdbc.driver'
 version '0.0.1-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 
@@ -16,4 +18,67 @@ dependencies {
     compile 'com.google.guava:guava:23.0'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Elasticsearch JDBC Driver'
+                packaging 'jar'
+                description 'Elasticsearch JDBC Driver'
+                url 'https://github.com/wyukawa/elasticsearch-jdbc-driver'
+
+                scm {
+                    connection 'scm:git@github.com:wyukawa/elasticsearch-jdbc-driver.git'
+                    developerConnection 'scm:git@github.com:wyukawa/elasticsearch-jdbc-driver.git'
+                    url 'scm:git@github.com:wyukawa/elasticsearch-jdbc-driver.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'wyukawa'
+                        name 'Wataru Yukawa'
+                        email 'wyukawa@gmail.com'
+                    }
+                }
+            }
+        }
+    }
 }
