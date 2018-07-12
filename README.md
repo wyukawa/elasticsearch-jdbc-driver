@@ -2,7 +2,7 @@
 
 unofficial elasticsearch jdbc driver, based on elasticsearch 6.3+'s rest api.
 
-copy from https://github.com/tokuhirom/unofficial-elasticsearch-jdbc-driver
+develop based on https://github.com/tokuhirom/unofficial-elasticsearch-jdbc-driver
 
 # Synopsis
 
