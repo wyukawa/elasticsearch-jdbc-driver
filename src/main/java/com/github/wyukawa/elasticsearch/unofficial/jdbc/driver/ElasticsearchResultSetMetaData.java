@@ -1,4 +1,4 @@
-package org.wyukawa.elasticsearch.unofficial.jdbc.driver;
+package com.github.wyukawa.elasticsearch.unofficial.jdbc.driver;
 
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;

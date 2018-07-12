@@ -1,4 +1,4 @@
-package org.wyukawa.elasticsearch.unofficial.jdbc.driver;
+package com.github.wyukawa.elasticsearch.unofficial.jdbc.driver;
 
 import org.junit.Test;
 
