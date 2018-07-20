@@ -27,4 +27,10 @@ public class ElasticsearchPreparedStatementTest {
         }
         assertNotNull(connection);
     }
+
+    @Test
+    public void translate() throws Exception {
+        ElasticsearchTranslateClient translateClient = new ElasticsearchTranslateClient("http://localhost:9200");
+        System.out.println(translateClient.translate("SELECT * FROM library WHERE release_date < '2000-01-01'"));
+    }
 }
