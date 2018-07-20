@@ -41,7 +41,7 @@ public class ElasticsearchClient {
                     .build();
             Response response = this.client.newCall(request).execute();
             if (response.code() != 200) {
-                throw new SQLException("ElasticSearch returns " + response.code());
+                throw new SQLException(String.format("ElasticSearch returns code=%d and message=%s", response.code(), response.message()));
             }
             ResponseBody responseBody = response.body();
             if (responseBody == null) {
