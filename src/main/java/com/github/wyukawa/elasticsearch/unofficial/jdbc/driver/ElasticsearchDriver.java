@@ -19,7 +19,7 @@ public class ElasticsearchDriver implements Driver {
 
     private static final int DRIVER_VERSION_MINOR;
 
-    static final String DRIVER_URL_START = "jdbc:es:";
+    public static final String DRIVER_URL_START = "jdbc:es:";
 
     static {
         String version = nullToEmpty(ElasticsearchDriver.class.getPackage().getImplementationVersion());
