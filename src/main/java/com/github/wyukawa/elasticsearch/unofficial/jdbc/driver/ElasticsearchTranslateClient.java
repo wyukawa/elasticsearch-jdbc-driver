@@ -42,7 +42,12 @@ public class ElasticsearchTranslateClient {
                     .build();
             Response response = this.client.newCall(request).execute();
             if (response.code() != 200) {
-                throw new SQLException(String.format("ElasticSearch returns code=%d and message=%s", response.code(), response.message()));
+                ResponseBody responseBody = response.body();
+                if (responseBody == null) {
+                    throw new SQLException(String.format("ElasticSearch returns code=%d and message=%s", response.code(), response.message()));
+                } else {
+                    throw new SQLException(String.format("ElasticSearch returns code=%d and message=%s and body=%s", response.code(), response.message(), responseBody.string()));
+                }
             }
             ResponseBody responseBody = response.body();
             if (responseBody == null) {
