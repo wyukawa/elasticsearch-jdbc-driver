@@ -43,7 +43,7 @@ public class ElasticsearchDriver implements Driver {
 
     @Override
     public Connection connect(String url, Properties info) throws SQLException {
-        return new ElasticsearchConnection(url, info);
+        return acceptsURL(url) ? new ElasticsearchConnection(url, info) : null;
     }
 
     @Override
