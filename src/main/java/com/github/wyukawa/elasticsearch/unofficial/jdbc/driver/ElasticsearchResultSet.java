@@ -30,6 +30,9 @@ public class ElasticsearchResultSet implements ResultSet {
             throws SQLException
     {
         String stringValue = elasticsearchResponse.getRows().get(this.index).get(index);
+        if(stringValue == null) {
+            return null;
+        }
         List<ElasticsearchResponse.ElasticsearchColumn> columns = elasticsearchResponse.getColumns();
         ElasticsearchResponse.ElasticsearchColumn elasticsearchColumn = columns.get(index);
         // https://www.elastic.co/guide/en/elasticsearch/reference/6.x/sql-data-types.html
