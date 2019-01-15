@@ -52,7 +52,7 @@ public class ElasticsearchResultSet implements ResultSet {
             return new Long(stringValue);
         } else if (type.equals("double")) {
             return new Double(stringValue);
-        } else if (type.equals("fload")) {
+        } else if (type.equals("float")) {
             return new Float(stringValue);
         } else if (type.equals("short")) {
             return new Short(stringValue);
